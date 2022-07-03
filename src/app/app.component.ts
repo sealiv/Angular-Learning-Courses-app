@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'courses-app';
+
+  currentUserName = 'Dove (mock)';
+
+  getUserName(): string {
+    return this.currentUserName;
+  }
 }

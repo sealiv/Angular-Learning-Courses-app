@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="first">
+        <h2>
+            <fa-icon [icon]="courseIcon"></fa-icon>
+            {{ course.courseTitle }}
+        </h2>
+        <p>{{course.text}}</p>
+    </div>
+    <div class="second">
+        <p><b>Authors:</b> {{ course.authors }} </p>
+        <p type="time"><b>Duration:</b> {{ course.duration }} </p>
+        <p type="date"><b>Created:</b> {{ course.created }} </p>
+        <div class="button-grp">
+            <button class="spase-btn" (click)="addNewShowIvent(course.courseTitle)"> Show course</button>
+            <button *ngIf="editable"> <fa-icon [icon]="editIcon"></fa-icon> </button>
+            <button *ngIf="editable"> <fa-icon [icon]="deleteIcon"></fa-icon> </button>
+        </div>
+    </div>
+</div>
+

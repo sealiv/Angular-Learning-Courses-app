@@ -1,0 +1,15 @@
+ label {
+    margin: 0 10px;
+  }
+
+button {
+    border: blueviolet solid 2px;
+    background-color: white;
+    height: 30px;
+    margin: 0 10px;
+  } 
+
+  .toolbar-item {
+    display: flex;
+    align-items: center;
+  }

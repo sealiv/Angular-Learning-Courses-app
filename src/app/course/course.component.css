@@ -1,0 +1,37 @@
+.card {
+    all: unset;
+    border-radius: 4px;
+    border: green solid 2px;
+    margin: 0 0px 16px;
+    padding: 0px 16px;
+    display: flex;
+    align-items: center;
+}
+
+.first {
+  width: 75%;
+}
+
+.second {
+  margin-left: 20px;
+  width: 25%;
+}
+
+.button-grp{
+  text-align: center;
+  margin: 10px 16px;
+}
+.spase-btn{
+  width: 150px;
+}
+
+button {
+  margin: 0 5px;
+  border: blueviolet solid 2px;
+  font-size: 16px;
+  background-color: white;
+  height: 30px;
+} 
+button:hover{
+  background-color: antiquewhite;
+}
