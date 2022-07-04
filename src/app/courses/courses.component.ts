@@ -1,6 +1,6 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { faL } from '@fortawesome/free-solid-svg-icons';
-import { CourseComponent } from '../course/course.component';
+// import { faL } from '@fortawesome/free-solid-svg-icons';
+// import { CourseComponent } from '../course/course.component';
 import { Course } from '../course/course.component';
 
 @Component({
@@ -13,7 +13,7 @@ export class CoursesComponent implements OnInit {
   course_1 = {
     courseTitle: 'Java',
     authors: ['Dave Simmonds', 'Nikolas Le-Mark'],
-    duration: 480,//'8:00 hours',
+    duration: 480,//'8:00 hours'
     created: new Date(2018, 1, 1),
     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus id cumque ratione commodi minima quas, optio, cum, dolores reprehenderit blanditiis eius aut architecto voluptates. Nobis quam animi quia commodi dolores?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis accusantium, corrupti libero atque laboriosam impedit facere dolorem consequatur. Nihil natus officia labore similique! Pariatur sit, suscipit illum inventore neque incidunt.',
     edit: true
@@ -22,7 +22,7 @@ export class CoursesComponent implements OnInit {
   course_2 = {
     courseTitle: 'ASP .NET',
     authors: ['Anna Sidorenko', 'Valentina Latina'],
-    duration: 1475,//'24:35 hours',
+    duration: 1475,//'24:35 hours'
     created: new Date(2020, 11, 11),
     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus id cumque ratione commodi minima quas, optio, cum, dolores reprehenderit blanditiis eius aut architecto voluptates. Nobis quam animi quia commodi dolores?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis accusantium, corrupti libero atque laboriosam impedit facere dolorem consequatur. Nihil natus officia labore similique! Pariatur sit, suscipit illum inventore neque incidunt.',
     edit: false
@@ -31,8 +31,8 @@ export class CoursesComponent implements OnInit {
   course_3 = {
     courseTitle: 'JavaScript',
     authors: ['Vasiliy Dobkin', 'Nicolas Kim'],
-    duration: 600,//'10:00 hours',
-    created: new Date(2019, 4, 20),//'20.05.2019',
+    duration: 600,//'10:00 hours'
+    created: new Date(2019, 4, 20),
     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus id cumque ratione commodi minima quas, optio, cum, dolores reprehenderit blanditiis eius aut architecto voluptates. Nobis quam animi quia commodi dolores?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis accusantium, corrupti libero atque laboriosam impedit facere dolorem consequatur. Nihil natus officia labore similique! Pariatur sit, suscipit illum inventore neque incidunt.',
     edit: false
   };
@@ -40,8 +40,8 @@ export class CoursesComponent implements OnInit {
   course_4 = {
     courseTitle: 'Angular',
     authors: ['Dave Haisenberg', 'Tony Ja'],
-    duration: 150,//'2:30 hours',
-    created: new Date(2012, 2, 20),//'20.03.2012',
+    duration: 150,//'2:30 hours'
+    created: new Date(2012, 2, 20),
     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus id cumque ratione commodi minima quas, optio, cum, dolores reprehenderit blanditiis eius aut architecto voluptates. Nobis quam animi quia commodi dolores?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis accusantium, corrupti libero atque laboriosam impedit facere dolorem consequatur. Nihil natus officia labore similique! Pariatur sit, suscipit illum inventore neque incidunt.',
     edit: true
   };
@@ -49,6 +49,8 @@ export class CoursesComponent implements OnInit {
   count = 0;
   
   courses: Course[];
+
+  private cardInput: any;
 
   showCourse(newItem: string) {
     console.log('show course ' + newItem + '...');
@@ -64,9 +66,23 @@ export class CoursesComponent implements OnInit {
     this.courses = [];
   }
 
-  ngOnInit(): void {
+  add(modal: any) {
+      this.cardInput = modal;
   }
 
+  bodyText: string = '';
+
+  ngOnInit() {
+      this.bodyText = 'This text can be updated in modal 1';
+  }
+
+  openModal() {
+    this.cardInput.open();
+  }
+
+  closeModal() {
+    this.cardInput.close();
+  }
 }
 
 

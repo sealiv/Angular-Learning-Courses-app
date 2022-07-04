@@ -15,3 +15,18 @@
     <button (click)="addCourse()">Add new course</button>
   </div>
 </ng-template>
+
+
+<div>
+  <h1>Home</h1>
+  <p>{{ bodyText }}</p>
+  <button (click)="openModal()">Open Modal 1</button>
+</div>
+  
+<jw-modal>
+  <h2> Removing course </h2>
+  <p> Are you confirm deleting this course?</p>
+  <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>
+  <button (click)="closeModal()">Remove course</button>
+  <button (click)="closeModal()">Close without removing</button>
+</jw-modal>
