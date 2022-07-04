@@ -1,13 +1,17 @@
 <div class="content">
+  <ng-template [ngIf]="courses.length > 0" [ngIfElse]="emptyList">
     <div class="card-container" *ngIf="courses.length">
       <app-course *ngFor="let item of courses" [course]="item" [editable]="item.edit" (newEvent)="showCourse($event)"></app-course>
       <button [disabled]="count > 3" (click)="addCourse()">Add new course</button>
     </div>
-    <div class="card-container" *ngIf="courses.length == 0">
-      <div class="empty-card">
-        <h2>Your list is empty</h2>
-        <p>Please use the <b>'Add new course'</b> button to add your first course</p>
-        <button (click)="addCourse()">Add new course</button>
-      </div>
-    </div>
+  </ng-template>
 </div>
+
+
+<ng-template #emptyList>
+  <div class="empty-card">
+    <h2>Your list is empty</h2>
+    <p>Please use the <b>'Add new course'</b> button to add your first course</p>
+    <button (click)="addCourse()">Add new course</button>
+  </div>
+</ng-template>

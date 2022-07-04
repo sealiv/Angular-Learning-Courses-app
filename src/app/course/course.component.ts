@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { faGraduationCap, faHammer, faTrash, faChevronRight } from '../shared/shared.module';
 
 export interface Course {
   courseTitle: string,
-    authors: string,
-    duration: string,
-    created: string,
+    authors: string[],
+    duration: number,
+    created: Date,
     text: string,
     edit: boolean
 }
@@ -23,9 +23,9 @@ export class CourseComponent implements OnInit {
 
   @Input() course = {
     courseTitle: '',
-    authors: '',
-    duration: '',
-    created: '',
+    authors: [''],
+    duration:  0,
+    created: new Date(),
     text: '',
     edit: false
   };
