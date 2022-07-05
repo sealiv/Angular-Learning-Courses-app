@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
-import { CoursesComponent } from '../courses/courses.component';
+import { CourseComponent } from '../course/course.component';
 
 
 @Component({ 
@@ -9,16 +9,16 @@ import { CoursesComponent } from '../courses/courses.component';
     encapsulation: ViewEncapsulation.None
 })
 export class ModalComponent implements OnInit, OnDestroy {
-    @Input() id: string = '';
+
     private element: any;
 
-    constructor(private el: ElementRef, private coursesComponent: CoursesComponent) {
+    constructor(private el: ElementRef, private course: CourseComponent) {
         this.element = el.nativeElement;
     }
 
     ngOnInit(): void {
         document.body.appendChild(this.element);
-        this.coursesComponent.add(this);
+        this.course.add(this);
     }
 
     ngOnDestroy(): void {

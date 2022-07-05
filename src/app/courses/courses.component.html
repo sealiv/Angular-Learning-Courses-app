@@ -1,7 +1,14 @@
 <div class="content">
   <ng-template [ngIf]="courses.length > 0" [ngIfElse]="emptyList">
     <div class="card-container" *ngIf="courses.length">
-      <app-course *ngFor="let item of courses" [course]="item" [editable]="item.edit" (newEvent)="showCourse($event)"></app-course>
+      <app-course *ngFor="let item of courses" 
+        [course]="item" [editable]="item.edit" 
+        (newEvent)="showCourse($event)"
+        [title]="confirmWindowInputs.title"
+        [message]="confirmWindowInputs.message"
+        [okButtonText]="confirmWindowInputs.okButtonText"
+        [cancelButtonText]="confirmWindowInputs.cancelButtonText">
+      </app-course>
       <button [disabled]="count > 3" (click)="addCourse()">Add new course</button>
     </div>
   </ng-template>
@@ -15,18 +22,3 @@
     <button (click)="addCourse()">Add new course</button>
   </div>
 </ng-template>
-
-
-<div>
-  <h1>Home</h1>
-  <p>{{ bodyText }}</p>
-  <button (click)="openModal()">Open Modal 1</button>
-</div>
-  
-<jw-modal>
-  <h2> Removing course </h2>
-  <p> Are you confirm deleting this course?</p>
-  <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>
-  <button (click)="closeModal()">Remove course</button>
-  <button (click)="closeModal()">Close without removing</button>
-</jw-modal>

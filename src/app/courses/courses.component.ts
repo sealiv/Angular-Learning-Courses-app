@@ -1,6 +1,4 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-// import { faL } from '@fortawesome/free-solid-svg-icons';
-// import { CourseComponent } from '../course/course.component';
+import { Component, OnInit } from '@angular/core';
 import { Course } from '../course/course.component';
 
 @Component({
@@ -48,6 +46,14 @@ export class CoursesComponent implements OnInit {
   sources = [this.course_1, this.course_2, this.course_3, this.course_4];
   count = 0;
   
+  confirmWindowInputs = {
+    'title': 'Removing course',
+    'message': 'Are you confirm removing this course?',
+    'okButtonText': 'Remove course',
+    'cancelButtonText': 'Close without removing'
+  };
+
+
   courses: Course[];
 
   private cardInput: any;
@@ -66,22 +72,8 @@ export class CoursesComponent implements OnInit {
     this.courses = [];
   }
 
-  add(modal: any) {
-      this.cardInput = modal;
-  }
-
-  bodyText: string = '';
-
-  ngOnInit() {
-      this.bodyText = 'This text can be updated in modal 1';
-  }
-
-  openModal() {
-    this.cardInput.open();
-  }
-
-  closeModal() {
-    this.cardInput.close();
+  ngOnInit(): void {
+      
   }
 }
 

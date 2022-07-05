@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { CoursesComponent } from '../courses/courses.component';
 import { faGraduationCap, faHammer, faTrash, faChevronRight } from '../shared/shared.module';
 
 export interface Course {
   courseTitle: string,
-    authors: string[],
-    duration: number,
-    created: Date,
-    text: string,
-    edit: boolean
+  authors: string[],
+  duration: number,
+  created: Date,
+  text: string,
+  edit: boolean
 }
 
 @Component({
@@ -17,9 +18,11 @@ export interface Course {
 })
 export class CourseComponent implements OnInit {
 
-
-
   @Input() editable = false;
+  @Input() title: string = '';
+  @Input() message: string = '';
+  @Input() okButtonText: string = '';
+  @Input() cancelButtonText: string = '';
 
   @Input() course = {
     courseTitle: '',
@@ -43,7 +46,6 @@ export class CourseComponent implements OnInit {
 
   addNewItem(value: string) {
     if (value.length) {
-      console.log('click on ' + value);
       this.newItemEvent3.emit(value);
     }
   }
@@ -54,5 +56,31 @@ export class CourseComponent implements OnInit {
   courseIcon = faGraduationCap;
   editIcon = faHammer;
   deleteIcon = faTrash;
-  chevronIcon = faChevronRight;
+
+  constructor(private coursesComponent: CoursesComponent) {}
+
+  private confimWindow: any;
+
+  add(modal: any) {
+    this.confimWindow = modal;
+  }
+
+  openModal(title: string) {
+    this.confimWindow.open();
+  }
+
+  closeButton() {
+    this.confimWindow.close();
+  }
+
+  okButton() {
+    this.confimWindow.close();
+    const newCourses: any = [];
+    this.coursesComponent.courses.forEach((i)=> {
+      if (i.courseTitle != this.course.courseTitle) {
+        newCourses.push(i);
+      }
+    })
+    this.coursesComponent.courses = newCourses;
+  }
 }
