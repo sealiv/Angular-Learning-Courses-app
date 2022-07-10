@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -6,12 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  @Input() userName = '';
-
-  logOut() {
-    console.log('Logging out')
-  }
 
   constructor() { }
 

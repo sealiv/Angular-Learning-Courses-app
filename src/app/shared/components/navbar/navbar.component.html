@@ -1,0 +1,11 @@
+<div class="toolbar" role="banner">
+    <img height="40" alt="Logo" src="assets/images/Logo.png" />
+    <div class="spacer"></div>
+    <div *ngIf="userName" class="toolbar-item">
+        <label>
+            <h4>{{userName}}</h4>
+        </label>
+        <button (click)="logOut()">LogOut</button>
+    </div>
+    <!-- <app-login [userName]="getUserName()"></app-login> -->
+</div>

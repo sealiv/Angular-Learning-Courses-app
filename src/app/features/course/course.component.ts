@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { CoursesComponent } from '../courses/courses.component';
-import { faGraduationCap, faHammer, faTrash, faChevronRight } from '../shared/shared.module';
+import { faGraduationCap, faHammer, faTrash } from '../../shared/shared.module';
 
 export interface Course {
   courseTitle: string,
