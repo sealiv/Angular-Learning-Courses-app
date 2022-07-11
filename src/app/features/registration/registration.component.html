@@ -1,1 +1,41 @@
-<p>registration works!</p>
+<navbar></navbar>
+
+<form  class="form-content">
+  <div class="div-column">
+    <h3>Registration</h3>
+    <div class="input-group">
+      <label><b>Name</b></label>
+      <input class="input-value" required minlength="6" [class.danger]="hasError || (userName.errors && (userName.dirty || userName.touched))" name="name" [(ngModel)]="name" #userName="ngModel"/>
+      <span class="danger" *ngIf="hasError || (userName.errors && userName.errors['required'] && (userName.dirty || userName.touched))">Name is required</span>
+      <span class="danger" *ngIf="hasError1 || (userName.errors && userName.errors['minlength'] && (userName.dirty || userName.touched))">Name is less than 6 characters</span>
+    </div>
+
+    <div class="input-group">
+      <label><b>Email</b></label>
+      <input class="input-value" required [class.danger]="hasError2 || (userEmail.errors && (userEmail.dirty || userEmail.touched))" name="email" [(ngModel)]="email" #userEmail="ngModel"/>
+      <span class="danger" *ngIf="hasError2 || (userEmail.errors && (userEmail.dirty || userEmail.touched))">Email is required</span>
+    </div>
+
+    <div class="input-group">
+      <label><b>Password</b></label>
+      <input class="input-value" required [class.danger]="hasError3 || (userPassword.errors && (userPassword.dirty || userPassword.touched))"
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        #userPassword="ngModel"
+      />
+      <span  class="danger" *ngIf="hasError3 || (userPassword.errors && (userPassword.dirty || userPassword.touched))">Password is required</span>
+    </div>
+
+    <app-button [btnText]="btnText" (click)="
+        hasError = userName.errors != null && userName.errors['required'] != null; 
+        hasError1 = userName.errors != null && userName.errors['minlength'] != null; 
+        hasError2 = userEmail.errors != null; 
+        hasError3 = userPassword.errors !=null; 
+        registration()"
+        >Добавить</app-button>
+    <div class="input-group">
+      <p>If you don't have an account you can <a href="#">Registration</a></p>
+    </div>
+  </div>
+</form>
