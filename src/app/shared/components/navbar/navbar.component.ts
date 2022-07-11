@@ -9,6 +9,7 @@ export class NavbarComponent implements OnInit {
 
   
   @Input() userName = '';
+  btnText = 'logOut';
 
   logOut() {
     console.log('Logging out')

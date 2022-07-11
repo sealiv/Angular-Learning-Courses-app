@@ -2,13 +2,6 @@ label {
     margin: 0 10px;
   }
 
-button {
-  border: blueviolet solid 2px;
-  background-color: white;
-  height: 30px;
-  margin: 0 10px;
-} 
-
 .toolbar-item {
   display: flex;
   align-items: center;
@@ -25,8 +18,9 @@ button {
   right: 0;
   height: 50px;
   display: flex;
+  margin: 10px;
   align-items: center;
-  border: red solid 2px;
+  border: rgba(241, 145, 145, 255) solid 2px;
 }
 
 .toolbar img {
