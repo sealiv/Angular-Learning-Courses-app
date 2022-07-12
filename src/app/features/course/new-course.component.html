@@ -1,0 +1,66 @@
+<navbar></navbar>
+
+<form [formGroup]="form" class="form-content">
+  <div>
+    <div class="input-group">
+      <label><b>Title</b></label>
+      <div class="inline-group">
+        <input type="text" class="input-value" required formControlName="courseTitle"
+               [class.danger]="(courseTitle.errors != null && (courseTitle.dirty || courseTitle.touched))" />
+        <app-button [btnText]="btnText" (click)="(form.valid && authors.length > 0) ? add() : null"> </app-button>
+      </div>
+      <span class="danger" *ngIf="(courseTitle.errors?.required  && (courseTitle.dirty || courseTitle.touched))">Title is required</span>
+    </div>
+    <div class="input-group">
+      <label><b>Description</b></label>
+      <textarea required name="text" formControlName="text"
+                [class.danger]="(text.errors != null && (text.dirty || text.touched))">
+      </textarea>
+      <span class="danger" *ngIf="(text.errors?.required  && (text.dirty || text.touched))">Title is required</span>
+    </div>
+
+    <section>
+      <div class="half-div">
+        <div class="input-group">
+          <h4>Add authors</h4>
+          <label><b>Author name</b></label>
+          <input type="text" class="input-value" required formControlName="author"
+                 [class.danger]="(authors.length === 0) && (author.dirty || author.touched)" />
+          <span class="danger" *ngIf="((author.errors?.required)  && (author.dirty || author.touched))">Title is required</span>
+        </div>
+        <app-button [btnText]="btnAuthorText" (click)="author.valid ? addAuthor(author.value) : null"></app-button>
+
+        <div class="input-group">
+          <h4>Duration</h4>
+          <label><b>Duration</b></label>
+          <input type="number" class="input-value" required min="1" formControlName="duration"
+                 [class.danger]="(duration.errors != null && (duration.dirty || duration.touched))" />
+          <span class="danger" *ngIf="((duration.errors?.required)  && (duration.dirty || duration.touched))">Title is required</span>
+          <label class="margin-v10">
+            Duration: <b>{{ (duration.value - duration.value % 60) / 60 | number:'2.0-0'}}:{{duration.value % 60 | number:'2.0-0'}}</b> hours
+          </label>
+        </div>
+      </div>
+
+
+      <div class="half-div">
+        <div class="input-group">
+          <h4>Authors list</h4>
+          <ng-container *ngIf="authors.length; else emptyList">
+            <div class="author" *ngFor="let item of authors; let isLast=last">
+              <!--            <span *ngFor="let autor of course.authors; let isLast=last"> {{ autor }}{{isLast? '' : ', '}}</span>-->
+              <label>{{item}}</label>
+              <app-button [btnText]="btnDelAuthorText" (click)="deleteAuthor(item)"></app-button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </section>
+  </div>
+</form>
+
+<ng-template #emptyList>
+  <div class="empty-card">
+    <p>Your list of authors is empty</p>
+  </div>
+</ng-template>

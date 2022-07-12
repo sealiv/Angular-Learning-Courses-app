@@ -5,17 +5,14 @@
     <h3>Login</h3>
     <div class="input-group">
       <label><b>Email</b></label>
-      <input class="input-value" required [class.danger]="hasError1 || (userEmail.errors && (userEmail.dirty || userEmail.touched))" name="email" [(ngModel)]="email" #userEmail="ngModel"/>
+      <input class="input-value" required name="email" [(ngModel)]="email" #userEmail="ngModel"
+             [class.danger]="hasError1 || (userEmail.errors && (userEmail.dirty || userEmail.touched))" />
       <span class="danger" *ngIf="hasError1 || (userEmail.errors && (userEmail.dirty || userEmail.touched))">Email is required</span>
     </div>
     <div class="input-group">
       <label><b>Password</b></label>
-      <input class="input-value" required [class.danger]="hasError2 || (userPassword.errors && (userPassword.dirty || userPassword.touched))"
-        type="password"
-        name="password"
-        [(ngModel)]="password"
-        #userPassword="ngModel"
-      />
+      <input class="input-value" required type="password" name="password" [(ngModel)]="password" #userPassword="ngModel"
+             [class.danger]="hasError2 || (userPassword.errors && (userPassword.dirty || userPassword.touched))"/>
       <span  class="danger" *ngIf="hasError2 || (userPassword.errors && (userPassword.dirty || userPassword.touched))">Password is required</span>
     </div>
     <app-button [btnText]="btnText" (click)="hasError1 = userEmail.errors != null; hasError2 = userPassword.errors !=null; login()"> </app-button>

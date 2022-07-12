@@ -10,12 +10,13 @@ import { CourseComponent } from './features/course/course.component';
 import { SharedModule } from './shared/shared.module';
 
 
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ModalModule } from './features/modal/modal.module';
+import {NewCourseComponent} from "./features/course/new-course.component";
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegistrationComponent, CoursesComponent, CourseComponent],
-  imports: [SharedModule, BrowserModule, AppRoutingModule, ModalModule, FormsModule ],
+  declarations: [AppComponent, LoginComponent, RegistrationComponent, CoursesComponent, CourseComponent, NewCourseComponent],
+  imports: [SharedModule, BrowserModule, AppRoutingModule, ModalModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })

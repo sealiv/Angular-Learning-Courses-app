@@ -1,26 +1,28 @@
 .form-content {
     border: rgba(164, 212, 239, 255) solid 2px;
-    margin-top: 73px;
     margin: 75px 2px 10px;
     padding: 10px;
     text-align: center;
 }
 
-
-
-.authors {
-    border: rgba(148, 147, 147, 255) solid 2px;
+section {
+  all: unset;
+  display: flex;
+  width: calc(100% - 25px);
+  padding: 10px;
+  border: rgba(148, 147, 147, 255) solid 2px;
+  text-align: left;
 }
 
 .div-column{
-    /* border: blue solid 2px; */
     max-width: 250px;
     margin:0 auto;
     padding: 0 10px;
 }
 
 .input-group {
-    padding-bottom: 10px;
+  padding-bottom: 10px;
+  text-align: center;
 }
 
 .input-group label{
@@ -28,15 +30,37 @@
     text-align:left;
 }
 
+.inline-group {
+  display: flex;
+}
+.inline-group input {
+  text-align: left;
+  width: 70%;
+}
+.inline-group app-button {
+  text-align: right;
+  width: 20%;
+}
+
+textarea {
+  all: unset;
+  display: block;
+  width: calc(100% - 8px);
+  padding: 0 2px;
+  border: rgba(249, 226, 158, 255) solid 2px;
+  text-align: left;
+  height: 100px;
+}
+
 
 .input-value{
-    all: unset;
-    display: block;
-    width: calc(100% - 8px);
-    padding: 0 2px;
-    border: orange solid 2px;
-    text-align: left;
-    height: 24px;
+  all: unset;
+  display: block;
+  width: calc(100% - 8px);
+  padding: 0 2px;
+  border: orange solid 2px;
+  text-align: left;
+  height: 24px;
 }
 span {
     display: block;

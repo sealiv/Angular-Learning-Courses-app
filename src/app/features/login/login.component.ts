@@ -13,9 +13,9 @@ export class LoginComponent implements OnInit {
   btnText = 'Login';
   hasError1 = false;
   hasError2 = false;
- 
+
   login() {
-    if (!this.getErrors()) { 
+    if (!this.getErrors()) {
       console.log('User with email: ' + this.email);
     }
     console.log('hasError = ' + this.getErrors());
