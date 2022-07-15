@@ -1,5 +1,5 @@
 <div class="content">
-  <ng-template [ngIf]="courses.length > 0" [ngIfElse]="emptyList">
+  <ng-container *ngIf="courses.length; else emptyList">
     <div class="card-container" *ngIf="courses.length">
       <app-course *ngFor="let item of courses" 
         [course]="item" [editable]="item.edit" 
@@ -11,7 +11,7 @@
       </app-course>
       <button [disabled]="count > 3" (click)="addCourse()">Add new course</button>
     </div>
-  </ng-template>
+  </ng-container>
 </div>
 
 

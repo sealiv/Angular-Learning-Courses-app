@@ -22,12 +22,12 @@
 
 button {
   margin: 0 5px;
-  border: blueviolet solid 2px;
+  border: purple solid 2px;
   font-size: 16px;
   background-color: white;
   height: 30px;
   width: 190px;
-} 
+}
 
 button:hover:enabled{
   background-color: antiquewhite;
