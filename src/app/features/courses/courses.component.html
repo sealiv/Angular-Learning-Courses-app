@@ -1,8 +1,10 @@
+<navbar></navbar>
+
 <div class="content">
   <ng-container *ngIf="courses.length; else emptyList">
     <div class="card-container" *ngIf="courses.length">
-      <app-course *ngFor="let item of courses" 
-        [course]="item" [editable]="item.edit" 
+      <app-course *ngFor="let item of courses"
+        [course]="item" [editable]="item.edit"
         (newEvent)="showCourse($event)"
         [title]="confirmWindowInputs.title"
         [message]="confirmWindowInputs.message"

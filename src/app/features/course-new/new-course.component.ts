@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'new-course',
+  selector: 'course-new',
   templateUrl: './new-course.component.html',
-  styleUrls: ['./course.component.css', '../../shared/components/shared.style.css']
+  styleUrls: ['../course/course.component.css', '../../shared/components/shared.style.css']
 })
 export class NewCourseComponent implements OnInit {
 
