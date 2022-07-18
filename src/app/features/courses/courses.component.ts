@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CoursesService} from "../services/courses.service";
 import {ActivatedRoute} from "@angular/router";
-import { ParamMap} from "@angular/router";
 
 @Component({
   selector: 'app-courses',
@@ -28,14 +27,17 @@ export class CoursesComponent implements OnInit {
   }
 
   addCourse() {
-    if(this.count < 4) {
-      this.courses.push(this.coursesService.courses$$.getValue()[this.count++]); //this.sources[this.count++]
+    console.log('size = ' + this.coursesService.size());
+    if(this.count <= this.coursesService.size()) {
+      this.courses.push(this.coursesService.courses$$.getValue()[this.count++]);
     }
   }
 
   constructor(private coursesService: CoursesService, private route: ActivatedRoute) {
-    // console.log('Courses.length = ' + coursesService.courses$$.value.length);
-    // this.courses = [];
+  }
+
+  getLimit(): number {
+    return this.coursesService.size();
   }
 
   ngOnInit(): void {

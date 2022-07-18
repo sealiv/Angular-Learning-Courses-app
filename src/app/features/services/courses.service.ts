@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {map} from 'rxjs/operators';
 
 import {Course} from "../models";
 
@@ -43,7 +42,7 @@ const COURSES: Course[] = [
   }
 ];
 
-const USER_COURSES: Object[] = []
+// const USER_COURSES: Object[] = []
 
 @Injectable()
 export class CoursesService {
@@ -58,44 +57,12 @@ export class CoursesService {
     return COURSES.length + 1;
   }
 
+  size(): number {
+    return COURSES.length;
+  }
+
   addNewCourse(course: Course) {
     COURSES.push(course);
     console.log('Added new course with title = ' + course.courseTitle);
   }
-/*
-  isUserAuthenticated(email: string, password: string): Observable<boolean> {
-    return this.getAllUsers().pipe(
-      map(users => {
-        const user = users.find(user => (user.email === email) && (user.password === password));
-
-        this.loggedInUser = !!user ? user : {} as User;
-        this.isloggedIn = !!user;
-
-        return this.isloggedIn;
-      }));
-  }
-
-  isUserLoggedIn(): boolean {
-    return this.isloggedIn;
-  }
-
-  getRedirectUrl(): string {
-    return this.redirectUrl;
-  }
-
-  setRedirectUrl(url: string): void {
-    this.redirectUrl = url;
-  }
-
-  getLoginUrl(): string {
-    return this.loginUrl;
-  }
-
-  getLoggedInUser(): User {
-    return this.loggedInUser;
-  }
-
-  logoutUser(): void {
-    this.isloggedIn = false;
-  }*/
 }

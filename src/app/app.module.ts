@@ -13,23 +13,15 @@ import {RegistrationComponent} from "./features/registration/registration.compon
 import {CoursesComponent} from "./features/courses/courses.component";
 import {CourseComponent} from "./features/course/course.component";
 import {NewCourseComponent} from "./features/course-new/new-course.component";
+import {CoursesService} from "./features/services/courses.service";
 
 
 @NgModule({
   imports: [
-    BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, ModalModule, ReactiveFormsModule,
-    // LoginModule,
-    // RegistrationComponent, CoursesComponent, CourseComponent, NewCourseComponent
+    BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, ModalModule, ReactiveFormsModule, FormsModule
   ],
-  declarations: [
-    AppComponent,
-    // LoginComponent,
-    RegistrationComponent, CoursesComponent, CourseComponent, NewCourseComponent
-  ],
-  providers: [
-    AuthService,
-    AuthGuardService
-  ],
+  declarations: [ AppComponent, RegistrationComponent, CoursesComponent, CourseComponent, NewCourseComponent ],
+  providers: [ AuthService, AuthGuardService, CoursesService ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

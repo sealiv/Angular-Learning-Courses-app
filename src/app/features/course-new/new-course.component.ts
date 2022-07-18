@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import {CoursesService} from "../services/courses.service";
+import {Course} from "../models";
 
 @Component({
   selector: 'course-new',
@@ -18,7 +20,7 @@ export class NewCourseComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() {
+  constructor(private coursesService: CoursesService) {
     this.form = new FormGroup({
       courseTitle: new FormControl(null),
       author: new FormControl(null),
@@ -53,6 +55,16 @@ export class NewCourseComponent implements OnInit {
 
   add() {
     if (!this.getErrors()) {
+      const course: Course = {
+        authors: this.authors,
+        courseTitle: this.form.value.courseTitle,
+        created: new Date(),
+        duration: this.form.value.duration,
+        edit: true,
+        id: this.coursesService.getNewId(),
+        text: this.form.value.text
+      }
+      this.coursesService.addNewCourse(course);
       console.log('add new Course: ' + this.form.value.courseTitle + ', ' + this.form.value.author + ', ' + this.form.value.text);
     }
   }

@@ -11,7 +11,7 @@
         [okButtonText]="confirmWindowInputs.okButtonText"
         [cancelButtonText]="confirmWindowInputs.cancelButtonText">
       </app-course>
-      <button [disabled]="count > 3" (click)="addCourse()">Add new course</button>
+      <button [disabled]="count >= getLimit()" (click)="addCourse()">Add new course</button>
     </div>
   </ng-container>
 </div>

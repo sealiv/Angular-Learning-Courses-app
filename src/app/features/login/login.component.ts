@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, FormsModule} from '@angular/forms';
 import {Router} from "@angular/router";
 import {AuthService} from "../../auth/services/auth.service";
 import {tap} from "rxjs";
@@ -14,34 +13,6 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {
   }
-
-  loginForm = new FormGroup({
-    username: new FormControl(),
-    password: new FormControl()
-  });
-
-/*  onFormSubmit(): void {
-    let username = this.loginForm.get('username')?.value;
-    let password = this.loginForm.get('password')?.value;
-
-    this.authService.isUserAuthenticated(username, password).pipe(
-      tap(isAuthenticated => {
-        console.log(isAuthenticated)
-        if (isAuthenticated) {
-          let url = this.authService.getRedirectUrl();
-          console.log(url)
-          this.router.navigate([url]);
-
-        } else {
-          this.invalidCredentialMsg = 'Invalid Credentials. Try again.';
-        }
-      }),
-    ).subscribe();
-  }*/
-
-
-
-
 
   takeLogin(): void {
     let email = this.email ? this.email : '';
