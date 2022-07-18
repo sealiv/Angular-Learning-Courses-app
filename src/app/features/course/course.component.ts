@@ -1,15 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { CoursesComponent } from '../courses/courses.component';
 import { faGraduationCap, faHammer, faTrash } from '../../shared/shared.module';
+import {Router} from "@angular/router";
 
-export interface Course {
+/*export interface Course {
+  id: number,
   courseTitle: string,
   authors: string[],
   duration: number,
   created: Date,
   text: string,
   edit: boolean
-}
+}*/
 
 @Component({
   selector: 'app-course',
@@ -25,6 +27,7 @@ export class CourseComponent implements OnInit {
   @Input() cancelButtonText: string = '';
 
   @Input() course = {
+    id: 0,
     courseTitle: '',
     authors: [''],
     duration:  0,
@@ -57,24 +60,34 @@ export class CourseComponent implements OnInit {
   editIcon = faHammer;
   deleteIcon = faTrash;
 
-  constructor(private coursesComponent: CoursesComponent) {}
+  constructor(private coursesComponent: CoursesComponent, private router: Router) {}
 
-  private confimWindow: any;
+  showCourse(id: number){
+    const path = '/courses/' + id;
+    this.router.navigate([path]);
+  }
+
+  editCourse(id: number){
+    const path = '/courses/edit/' + id;
+    this.router.navigate([path]);
+  }
+
+  private confirmWindow: any;
 
   add(modal: any) {
-    this.confimWindow = modal;
+    this.confirmWindow = modal;
   }
 
   openModal(title: string) {
-    this.confimWindow.open();
+    this.confirmWindow.open();
   }
 
   closeButton() {
-    this.confimWindow.close();
+    this.confirmWindow.close();
   }
 
   okButton() {
-    this.confimWindow.close();
+    this.confirmWindow.close();
     const newCourses: any = [];
     this.coursesComponent.courses.forEach((i)=> {
       if (i.courseTitle != this.course.courseTitle) {

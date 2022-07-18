@@ -1,38 +1,37 @@
 <div class="card">
     <div class="first">
         <h2>
-            <!-- <fa-icon [icon]="courseIcon"></fa-icon> -->
+            {{ course.id }}
             {{ course.courseTitle }}
         </h2>
         <p>{{course.text}}</p>
     </div>
     <div class="second">
         <p>
-            <b>Authors:</b> 
+            <b>Authors:</b>
             <span *ngFor="let autor of course.authors; let isLast=last"> {{ autor }}{{isLast? '' : ', '}}</span>
         </p>
         <p type="time">
-            <b>Duration:</b> 
-            {{ (course.duration - course.duration % 60) / 60 | number:'2.0-0'}}:{{course.duration % 60 | number:'2.0-0'}} hours 
+            <b>Duration:</b>
+            {{ (course.duration - course.duration % 60) / 60 | number:'2.0-0'}}:{{course.duration % 60 | number:'2.0-0'}} hours
         </p>
         <p type="date">
-            <b>Created:</b> 
-            {{ course.created | date:'dd.MM.yyyy'}} 
+            <b>Created:</b>
+            {{ course.created | date:'dd.MM.yyyy'}}
         </p>
         <div class="button-grp">
-            <button class="spase-btn" (click)="addNewShowIvent(course.courseTitle)"> Show course</button>
-            <button *ngIf="editable"> <fa-icon [icon]="editIcon"></fa-icon> </button>
+            <button class="spase-btn" (click)="showCourse(course.id)"> Show course</button>
+            <button *ngIf="editable"> <fa-icon [icon]="editIcon" (click)="editCourse(course.id)"></fa-icon> </button>
             <button *ngIf="editable" (click)="openModal(course.courseTitle)"> <fa-icon [icon]="deleteIcon"></fa-icon> </button>
         </div>
     </div>
 </div>
 
 
-    
-  <jw-modal id="close-1">
+<jw-modal id="close-1">
     <h2> {{title}} </h2>
     <p> {{message}} </p>
     <button (click)="okButton()">{{okButtonText}}</button>
     <button (click)="closeButton()">{{cancelButtonText}}</button>
-  </jw-modal> 
+</jw-modal>
 
