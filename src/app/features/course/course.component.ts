@@ -3,15 +3,6 @@ import { CoursesComponent } from '../courses/courses.component';
 import { faGraduationCap, faHammer, faTrash } from '../../shared/shared.module';
 import {Router} from "@angular/router";
 
-/*export interface Course {
-  id: number,
-  courseTitle: string,
-  authors: string[],
-  duration: number,
-  created: Date,
-  text: string,
-  edit: boolean
-}*/
 
 @Component({
   selector: 'app-course',

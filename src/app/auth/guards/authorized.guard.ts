@@ -8,7 +8,7 @@ export class AuthorizedGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, { url }: RouterStateSnapshot): boolean {
-    if (this.authService.isUserLogin()) {
+    if (this.authService.isAuthorized$) {
       return true;
     }
     this.authService.setRedirectUrl(url);

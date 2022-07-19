@@ -15,14 +15,27 @@ import {CourseComponent} from "./features/course/course.component";
 import {NewCourseComponent} from "./features/course-new/new-course.component";
 import {CoursesService} from "./features/courses/services/courses.service";
 import {NonAuthorizedGuard} from "./auth/guards/non-authorized.guard";
+import {UserService} from "./user/services/user.service";
+import {AdminGuard} from "./user/services/admin.guard";
+import {UserStoreService} from "./user/services/user-store.service";
+import {SessionStorageService} from "./auth/services/session-storage.service";
 
 
 @NgModule({
   imports: [
     BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, ModalModule, ReactiveFormsModule, FormsModule,
   ],
-  declarations: [ AppComponent, RegistrationComponent, CoursesComponent, CourseComponent, NewCourseComponent ],
-  providers: [ AuthService, AuthorizedGuard, NonAuthorizedGuard, CoursesService, { provide: Window, useValue: window } ],
+  declarations: [ AppComponent, /*RegistrationComponent,*/ CoursesComponent, CourseComponent, NewCourseComponent ],
+  providers: [
+    AuthService,
+    SessionStorageService,
+    AuthorizedGuard,
+    NonAuthorizedGuard,
+    CoursesService,
+    UserService,
+    UserStoreService,
+    AdminGuard,
+    { provide: Window, useValue: window } ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

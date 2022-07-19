@@ -14,7 +14,11 @@ const routes: Routes = [
     redirectTo: 'courses',
     pathMatch: 'full',
   },*/
-    { path: 'registration', component: RegistrationComponent, canActivate: [NonAuthorizedGuard] },
+  // {
+  //   path: 'registration',
+  //   component: RegistrationComponent,
+    // canActivate: [NonAuthorizedGuard]
+  // },
   {
     path: '',
     component: AppComponent,
@@ -33,10 +37,16 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'registration',
+    loadChildren: () =>
+      import('./user/user.module').then((m) => m.UserModule),
+    // canActivate: [NonAuthorizedGuard]
+  },
+  {
     path: 'login',
     loadChildren: () =>
       import('./auth/auth.module').then((m) => m.AuthModule),
-    canActivate: [NonAuthorizedGuard]
+    // canActivate: [NonAuthorizedGuard]
   },
   {
     path: '**', component: AppComponent

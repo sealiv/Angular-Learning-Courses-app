@@ -77,3 +77,14 @@ app-button{
     color: #dc3545;
     border-color: #dc3545;
 }
+
+
+.shared-button {
+  border: purple solid 2px;
+  background-color: white;
+  height: 30px;
+  width: 100%;
+}
+.shared-button:hover{
+  background-color: antiquewhite;
+}

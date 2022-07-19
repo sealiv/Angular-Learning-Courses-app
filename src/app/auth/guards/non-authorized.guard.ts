@@ -8,7 +8,7 @@ export class NonAuthorizedGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, { url }: RouterStateSnapshot): boolean {
-    if (this.authService.isUserLogin()) {
+    if (this.authService.isAuthorized$) {
       this.authService.setRedirectUrl(url);
       this.router.navigate(['courses']);
       return false;

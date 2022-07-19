@@ -2,39 +2,16 @@ import {Inject, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 
-import {Roles, User} from "../models";
+import {User} from "../models";
 import {SessionStorageService} from "./session-storage.service";
-
-const USERS: User[] = [
-  {
-    id: 1,
-    username: 'maria admin',
-    email: '1',
-    password: '1',
-    role: Roles.admin,
-  },
-  {
-    id: 2,
-    username: 'alex admin',
-    email: '2',
-    password: '2',
-    role: Roles.admin,
-  },
-  {
-    id: 3,
-    username: 'alex user',
-    email: '3',
-    password: '3',
-    role: Roles.user,
-  }
-];
+import {UserStoreService} from "../../user/services/user-store.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-  private isAuthorized$$ = new BehaviorSubject(USERS);
-  private isAuthorized$ = new Observable<boolean>();
-  private isAuthorized: boolean = false;
+  private isAuthorized$$ = new BehaviorSubject(this.userStoreService.getAll());
+  public isAuthorized$ = new Observable<boolean>();
+  public isAuthorized: boolean = false;
 
   private redirectUrl: string = '/';
   private loginUrl: string = '/login';
@@ -44,7 +21,9 @@ export class AuthService {
     return this.isAuthorized$$.asObservable();
   }
 
-  constructor(@Inject(Window) private window: Window, private sessionStorageService: SessionStorageService) {
+  constructor(@Inject(Window) private window: Window,
+              private sessionStorageService: SessionStorageService,
+              private userStoreService: UserStoreService) {
   }
 
   isUserAuthenticated(email: string, password: string): Observable<boolean> {
@@ -58,8 +37,10 @@ export class AuthService {
         const user = users.find(user => (user.email === email) && (user.password === password));
         this.user = user != null ? user : {} as User;
         this.isAuthorized = user != null;
-        const token = user.id + '_' + user.username + '_' + user.email + '_' + new Date().valueOf();
-        this.sessionStorageService.setToken(token);
+        if (!!user) {
+          const token = user.id + '_' + user.username + '_' + user.email + '_' + new Date().valueOf();
+          this.sessionStorageService.setToken(token);
+        }
         return this.isAuthorized;
       }
     ));
