@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {AuthGuardService} from './auth/services/auth-guard.service';
+import {AuthorizedGuard} from './auth/guards/authorized.guard';
 import {AuthService} from './auth/services/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SharedModule} from "./shared/shared.module";
@@ -13,15 +13,16 @@ import {RegistrationComponent} from "./features/registration/registration.compon
 import {CoursesComponent} from "./features/courses/courses.component";
 import {CourseComponent} from "./features/course/course.component";
 import {NewCourseComponent} from "./features/course-new/new-course.component";
-import {CoursesService} from "./features/services/courses.service";
+import {CoursesService} from "./features/courses/services/courses.service";
+import {NonAuthorizedGuard} from "./auth/guards/non-authorized.guard";
 
 
 @NgModule({
   imports: [
-    BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, ModalModule, ReactiveFormsModule, FormsModule
+    BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, ModalModule, ReactiveFormsModule, FormsModule,
   ],
   declarations: [ AppComponent, RegistrationComponent, CoursesComponent, CourseComponent, NewCourseComponent ],
-  providers: [ AuthService, AuthGuardService, CoursesService ],
+  providers: [ AuthService, AuthorizedGuard, NonAuthorizedGuard, CoursesService, { provide: Window, useValue: window } ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

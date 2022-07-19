@@ -1,8 +1,9 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 import {Roles, User} from "../models";
+import {SessionStorageService} from "./session-storage.service";
 
 const USERS: User[] = [
   {
@@ -30,34 +31,42 @@ const USERS: User[] = [
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
+
+  private isAuthorized$$ = new BehaviorSubject(USERS);
+  private isAuthorized$ = new Observable<boolean>();
+  private isAuthorized: boolean = false;
+
   private redirectUrl: string = '/';
   private loginUrl: string = '/login';
-  private isloggedIn: boolean = false;
-  private loggedInUser = {} as User;
-
-  users$$ = new BehaviorSubject(USERS);
+  private user = {} as User;
 
   getAllUsers(): Observable<User[]> {
-    return this.users$$.asObservable();
+    return this.isAuthorized$$.asObservable();
+  }
+
+  constructor(@Inject(Window) private window: Window, private sessionStorageService: SessionStorageService) {
   }
 
   isUserAuthenticated(email: string, password: string): Observable<boolean> {
-    return this.getAllUsers().pipe(
-      map(users => {
-        const user = users.find(user => (user.email === email) && (user.password === password));
-
-        this.loggedInUser = user != null ? user : {} as User;
-        if (user != null) {
-          this.isloggedIn = !!user;
-        }
-        console.log('user from auth.service new = ' + this.loggedInUser.username);
-        return this.isloggedIn;
-      }));
-
+    this.checkUser(email, password);
+    return this.isAuthorized$;
   }
 
-  isUserLoggedIn(): boolean {
-    return this.isloggedIn;
+  checkUser(email: string, password: string): void {
+    this.isAuthorized$ = this.isAuthorized$$.asObservable().pipe(
+      map(users => {
+        const user = users.find(user => (user.email === email) && (user.password === password));
+        this.user = user != null ? user : {} as User;
+        this.isAuthorized = user != null;
+        const token = user.id + '_' + user.username + '_' + user.email + '_' + new Date().valueOf();
+        this.sessionStorageService.setToken(token);
+        return this.isAuthorized;
+      }
+    ));
+  }
+
+  isUserLogin(): boolean {
+    return this.isAuthorized;
   }
 
   getRedirectUrl(): string {
@@ -72,11 +81,12 @@ export class AuthService {
     return this.loginUrl;
   }
 
-  getLoggedInUser(): User {
-    return this.loggedInUser;
+  getUser(): User {
+    return this.user;
   }
 
   logoutUser(): void {
-    this.isloggedIn = false;
+    this.user = {} as User;
+    this.isAuthorized = false;
   }
 }

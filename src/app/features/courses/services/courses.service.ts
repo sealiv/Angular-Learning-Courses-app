@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 
-import {Course} from "../models";
+import {Course} from "../../models";
 
 const COURSES: Course[] = [
   {
@@ -46,6 +46,9 @@ const COURSES: Course[] = [
 
 @Injectable()
 export class CoursesService {
+
+  constructor(@Inject(Window) private window: Window) {
+  }
 
   courses$$ = new BehaviorSubject(COURSES);
 
