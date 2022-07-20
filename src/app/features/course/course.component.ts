@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { CoursesComponent } from '../courses/courses.component';
 import { faGraduationCap, faHammer, faTrash } from '../../shared/shared.module';
 import {Router} from "@angular/router";
+import {UserService} from "../../user/services/user.service";
 
 
 @Component({
@@ -36,7 +37,7 @@ export class CourseComponent implements OnInit {
   editIcon = faHammer;
   deleteIcon = faTrash;
 
-  constructor(private coursesComponent: CoursesComponent, private router: Router) {}
+  constructor(private coursesComponent: CoursesComponent, private router: Router, private userService: UserService) {}
 
   showCourse(id: number){
     const path = '/courses/' + id;
@@ -49,6 +50,10 @@ export class CourseComponent implements OnInit {
   }
 
   private confirmWindow: any;
+
+  isAdmin() {
+    return this.userService.isUserAdmin();
+  }
 
   add(modal: any) {
     this.confirmWindow = modal;

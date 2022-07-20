@@ -21,8 +21,8 @@
         </p>
         <div class="button-grp">
             <button class="spase-btn" (click)="showCourse(course.id)"> Show course</button>
-            <button *ngIf="editable"> <fa-icon [icon]="editIcon" (click)="editCourse(course.id)"></fa-icon> </button>
-            <button *ngIf="editable" (click)="openModal(course.courseTitle)"> <fa-icon [icon]="deleteIcon"></fa-icon> </button>
+            <button *ngIf="isAdmin()"> <fa-icon [icon]="editIcon" (click)="editCourse(course.id)"></fa-icon> </button>
+            <button *ngIf="isAdmin()" (click)="openModal(course.courseTitle)"> <fa-icon [icon]="deleteIcon"></fa-icon> </button>
         </div>
     </div>
 </div>

@@ -1,8 +1,9 @@
 import {Inject, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {User, Roles} from "../../auth/models";
+import {Roles, User} from "../../auth/models";
 import {map} from "rxjs/operators";
 import {UserStoreService} from "./user-store.service";
+import {AuthService} from "../../auth/services/auth.service";
 
 @Injectable({ providedIn: 'root'})
 export class UserService {
@@ -16,7 +17,7 @@ export class UserService {
 
   private user = {} as User;
 
-  constructor(@Inject(Window) private window: Window, private userStoreService: UserStoreService) {
+  constructor(@Inject(Window) private window: Window, private userStoreService: UserStoreService, private authService: AuthService) {
   }
 
   createUser(user: User) {
@@ -29,7 +30,7 @@ export class UserService {
       map(users => {
         const user = users.find(user => (user.id === id));
         this.user = user != null ? user : {} as User;
-        this.isAdmin = user.role === Roles.admin;
+        this.isAdmin = (user.role === Roles.admin);
         this.isAdmin$$.value.push(this.isAdmin);
         return user;
       })
@@ -37,8 +38,8 @@ export class UserService {
     return this.user;
   }
 
-  isUserAdmin(name: string): boolean {
-    return false;
+  isUserAdmin(): boolean {
+    return this.authService.getUser().role === Roles.admin;
   }
 
   getNewId(): number {
