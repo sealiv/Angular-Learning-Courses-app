@@ -11,7 +11,8 @@ import {Router} from "@angular/router";
 })
 export class NewCourseComponent implements OnInit {
 
-  btnText = 'Create course';
+  btnTextCreate = 'Create course';
+  btnTextEdit = 'Save changes';
   btnAuthorText = 'Create author';
   btnDelAuthorText = 'Delete author';
   hasError = false;
@@ -33,7 +34,9 @@ export class NewCourseComponent implements OnInit {
 
   authors = [];
 
-  // private cardInput: any;
+  isNew(): boolean {
+    return true;
+  }
 
   showCourse(newItem: string) {
     console.log('show course ' + newItem + '...');
@@ -56,7 +59,7 @@ export class NewCourseComponent implements OnInit {
   }
 
 
-  add() {
+  edit() {
     if (!this.getErrors()) {
       const course: Course = {
         authors: this.authors,

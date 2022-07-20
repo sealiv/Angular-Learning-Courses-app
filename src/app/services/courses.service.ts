@@ -35,6 +35,10 @@ export class CoursesService {
     this.coursesStoreService.create(course);
   }
 
+  getCourse(id: number) {
+    return this.courses$$.getValue()[id - 1];
+  }
+
   addUserCourse(user: User) {
     const userCourse = this.getUserCoursesByUserId(user.id);
     const course = this.courses$$.getValue()[this.userCoursesSize(user)];

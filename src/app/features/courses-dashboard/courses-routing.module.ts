@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import {CoursesComponent} from "../courses/courses.component";
-import {NewCourseComponent} from "../course-new/new-course.component";
+import {NewCourseComponent} from "../course-edit/new-course.component";
 import {CoursesDashboardComponent} from "./courses-dashboard.component";
 import {SharedModule} from "../../shared/shared.module";
 import {AuthorizedGuard} from "../../auth/guards/authorized.guard";
 import {AdminGuard} from "../../user/services/admin.guard";
+import {EditCourseComponent} from "../course-edit/edit-course.component";
 
 const articleRoutes: Routes = [
   {
@@ -29,7 +30,7 @@ const articleRoutes: Routes = [
       },
       {
         path: 'edit/:id',
-        component: NewCourseComponent,
+        component: EditCourseComponent,
         canActivate: [AdminGuard],
       },
     ],

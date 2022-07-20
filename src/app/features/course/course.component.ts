@@ -29,21 +29,6 @@ export class CourseComponent implements OnInit {
 
   @Output() newEvent = new EventEmitter<string>();
 
-  addNewShowIvent(value: string) {
-    if (value.length) {
-      console.log('click on ' + value);
-      this.newEvent.emit(value);
-    }
-  }
-
-  @Output() newItemEvent3 = new EventEmitter<string>();
-
-  addNewItem(value: string) {
-    if (value.length) {
-      this.newItemEvent3.emit(value);
-    }
-  }
-
   ngOnInit(): void {
   }
 

@@ -1,6 +1,6 @@
 <!--<navbar></navbar>-->
 
-<form [formGroup]="form" class="form-content" (ngSubmit)="registration()">
+<form [formGroup]="form" class="form-content">
   <div class="div-column">
     <h3>Registration</h3>
     <div class="input-group">
@@ -25,7 +25,7 @@
        <span  class="danger" *ngIf="hasError3 || (password.errors && (password.dirty || password.touched))">Password is required</span>
     </div>
 
-     <button class="shared-button" type="submit">Registration</button>
+    <app-button [btnText]="btnText" (click)="registration()"></app-button>
 
     <div class="input-group">
       <p>If you have an account you can <a routerLink="/login">Login</a></p>

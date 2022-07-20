@@ -12,7 +12,7 @@ import {ModalModule} from "./features/modal/modal.module";
 import {RegistrationComponent} from "./features/registration/registration.component";
 import {CoursesComponent} from "./features/courses/courses.component";
 import {CourseComponent} from "./features/course/course.component";
-import {NewCourseComponent} from "./features/course-new/new-course.component";
+import {NewCourseComponent} from "./features/course-edit/new-course.component";
 import {CoursesService} from "./services/courses.service";
 import {NonAuthorizedGuard} from "./auth/guards/non-authorized.guard";
 import {UserService} from "./user/services/user.service";
