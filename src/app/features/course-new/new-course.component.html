@@ -24,11 +24,11 @@
         <div class="input-group">
           <h4>Add authors</h4>
           <label><b>Author name</b></label>
-          <input type="text" class="input-value" required formControlName="author"
+          <input type="text" class="input-value" formControlName="author"
                  [class.danger]="(authors.length === 0) && (author.dirty || author.touched)" />
           <span class="danger" *ngIf="((author.errors?.required)  && (author.dirty || author.touched))">Title is required</span>
         </div>
-        <app-button [btnText]="btnAuthorText" (click)="author.valid ? addAuthor(author.value) : null"></app-button>
+        <app-button [btnText]="btnAuthorText" (click)="addAuthor(author.value); author.setValue('')"></app-button>
 
         <div class="input-group">
           <h4>Duration</h4>

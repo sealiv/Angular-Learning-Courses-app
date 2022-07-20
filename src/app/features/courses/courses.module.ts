@@ -1,25 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ReactiveFormsModule} from "@angular/forms";
-import {MatListModule} from "@angular/material/list";
-import {RouterModule} from "@angular/router";
-import {CoursesService} from "./services/courses.service";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
+  declarations: [],
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    // ArticleRoutingModule,
-    // MatListModule,
-    RouterModule,
-  ],
-  declarations: [
-    // ArticleComponent,
-    // ArticleListComponent,
-    // ArticleEditComponent,
-  ],
-  providers: [CoursesService]
+    CommonModule, ReactiveFormsModule, SharedModule
+  ]
 })
-export class CoursesModule {
-}
+export class CourseModule { }

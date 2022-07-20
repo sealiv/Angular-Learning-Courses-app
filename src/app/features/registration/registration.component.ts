@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from "../../user/services/user.service";
 import {Roles, User} from "../../auth/models";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -18,7 +19,7 @@ export class RegistrationComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required, Validators.minLength(6)]),
       email: new FormControl(null, [Validators.required]),
@@ -36,6 +37,7 @@ export class RegistrationComponent implements OnInit {
         role: Roles.user
       }
       this.userService.createUser(user);
+      this.router.navigate(['login']);
     }
   }
 

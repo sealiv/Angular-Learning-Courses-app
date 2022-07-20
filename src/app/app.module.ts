@@ -13,7 +13,7 @@ import {RegistrationComponent} from "./features/registration/registration.compon
 import {CoursesComponent} from "./features/courses/courses.component";
 import {CourseComponent} from "./features/course/course.component";
 import {NewCourseComponent} from "./features/course-new/new-course.component";
-import {CoursesService} from "./features/courses/services/courses.service";
+import {CoursesService} from "./services/courses.service";
 import {NonAuthorizedGuard} from "./auth/guards/non-authorized.guard";
 import {UserService} from "./user/services/user.service";
 import {AdminGuard} from "./user/services/admin.guard";
@@ -23,15 +23,15 @@ import {SessionStorageService} from "./auth/services/session-storage.service";
 
 @NgModule({
   imports: [
-    BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, ModalModule, ReactiveFormsModule, FormsModule,
+    BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, /*ModalModule,*/ ReactiveFormsModule, FormsModule,
   ],
-  declarations: [ AppComponent, /*RegistrationComponent,*/ CoursesComponent, CourseComponent, NewCourseComponent ],
+  declarations: [ AppComponent, /*RegistrationComponent, CoursesComponent,*/ /*CourseComponent, *//*NewCourseComponent*/ ],
   providers: [
     AuthService,
     SessionStorageService,
     AuthorizedGuard,
     NonAuthorizedGuard,
-    CoursesService,
+    // CoursesService,
     UserService,
     UserStoreService,
     AdminGuard,

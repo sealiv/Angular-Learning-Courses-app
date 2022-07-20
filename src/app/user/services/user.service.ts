@@ -24,10 +24,10 @@ export class UserService {
     this.userStoreService.create(user);
   }
 
-  getUser(name: string): User {
+  getUser(id: number): User {
     this.name$ = this.name$$.asObservable().pipe(
       map(users => {
-        const user = users.find(user => (user.username === name));
+        const user = users.find(user => (user.id === id));
         this.user = user != null ? user : {} as User;
         this.isAdmin = user.role === Roles.admin;
         this.isAdmin$$.value.push(this.isAdmin);

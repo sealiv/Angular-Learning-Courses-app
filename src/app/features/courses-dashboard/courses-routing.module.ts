@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CanDeactivateGuard } from './services/can-deactivate.guard';
-import {CoursesComponent} from "./courses.component";
+import {CoursesComponent} from "../courses/courses.component";
 import {NewCourseComponent} from "../course-new/new-course.component";
+import {CoursesDashboardComponent} from "./courses-dashboard.component";
+import {SharedModule} from "../../shared/shared.module";
+import {AuthorizedGuard} from "../../auth/guards/authorized.guard";
+import {AdminGuard} from "../../user/services/admin.guard";
 
 const articleRoutes: Routes = [
   {
     path: '',
-    component: CoursesComponent,
-    // canActivateChild: [AuthGuardService],
+    component: CoursesDashboardComponent,
+    canActivate: [AuthorizedGuard],
     children: [
       {
         path: '',
@@ -18,24 +21,23 @@ const articleRoutes: Routes = [
       {
         path: 'add',
         component: NewCourseComponent,
-        // canDeactivate: [CanDeactivateGuard],
+        canActivate: [AdminGuard],
       },
       {
         path: ':id',
         component: CoursesComponent,
-        // canDeactivate: [CanDeactivateGuard],
       },
       {
         path: 'edit/:id',
         component: NewCourseComponent,
-        // canDeactivate: [CanDeactivateGuard],
+        canActivate: [AdminGuard],
       },
     ],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(articleRoutes)],
+  imports: [RouterModule.forChild(articleRoutes), SharedModule],
   exports: [RouterModule],
 })
 export class CoursesRoutingModule {}

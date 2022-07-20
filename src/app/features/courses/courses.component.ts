@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {CoursesService} from "./services/courses.service";
+import {CoursesService} from "../../services/courses.service";
 import {ActivatedRoute} from "@angular/router";
+import {Course} from "../models";
+import {UserService} from "../../user/services/user.service";
+import {AuthService} from "../../auth/services/auth.service";
 
 @Component({
   selector: 'app-courses',
@@ -9,7 +12,12 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class CoursesComponent implements OnInit {
 
-  count = 0;
+  constructor(
+    private coursesService: CoursesService,
+    private userService: UserService,
+    private authService: AuthService,
+    private route: ActivatedRoute) {
+  }
 
   confirmWindowInputs = {
     'title': 'Removing course',
@@ -18,22 +26,27 @@ export class CoursesComponent implements OnInit {
     'cancelButtonText': 'Close without removing'
   };
 
-  courses = [];
-
-  private cardInput: any;
-
   showCourse(newItem: string) {
     console.log('show course ' + newItem + '...');
   }
 
-  addCourse() {
-    console.log('size = ' + this.coursesService.size());
-    if(this.count <= this.coursesService.size()) {
-      this.courses.push(this.coursesService.courses$$.getValue()[this.count++]);
-    }
+  getCount(): number {
+    return this.coursesService.userCoursesSize(this.authService.getUser());
   }
 
-  constructor(private coursesService: CoursesService, private route: ActivatedRoute) {
+  addCourse() {
+    if(this.getCount() <= this.coursesService.size()) {
+      this.coursesService.addUserCourse(this.authService.getUser());
+    }
+  }
+  getCourses(): Course[] {
+    const userId = this.authService.getUser().id;
+    return this.coursesService.getCoursesByUserId(userId);
+  }
+
+  setCourses(courses: Course[]): void {
+    const user = this.authService.getUser();
+    this.coursesService.setUserCoursesByUser(courses, user);
   }
 
   getLimit(): number {
@@ -41,9 +54,6 @@ export class CoursesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.pathFromRoot.forEach( v =>
-      console.log('params = ' + v)
-    );
   }
 }
 

@@ -5,17 +5,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
 import {RegistrationComponent} from "../features/registration/registration.component";
 
-
-/*
-@NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
-})
-export class UserModule { }*/
-
-
 const authRoutes: Routes = [
   {
     path: '',

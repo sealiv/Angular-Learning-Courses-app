@@ -2,7 +2,7 @@
   <a href="/courses"><img height="40" alt="Logo" src="assets/images/Logo.png" /></a>
   <div class="spacer">
     <label><a routerLink="/">Homepage</a></label>
-    <label><a routerLink="/article">Article</a></label>
+<!--    <label><a routerLink="/article">Article</a></label>-->
     <label><a routerLink="/courses/add">Add course</a></label>
     <label><a routerLink="/courses">Courses</a></label>
 <!--      <label><a href="/courses/:id">Course</a></label>-->
@@ -11,7 +11,7 @@
   </div>
   <div *ngIf="loggedInUser.id > 0" class="toolbar-item">
       <label>
-          <h4>{{loggedInUser.username}}</h4>
+          <h4>{{loggedInUser.username}} | {{loggedInUser.role}}</h4>
       </label>
       <app-button [btnText]="btnText" (click)="logout()"></app-button>
   </div>

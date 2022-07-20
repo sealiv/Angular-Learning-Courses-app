@@ -37,7 +37,6 @@ export class UserStoreService {
 
   create(user: User) {
     user.id = USERS.length + 1;
-    console.log('User-store.service.ts => user.id = ' + user.id);
     USERS.push(user);
   }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import {CoursesService} from "../courses/services/courses.service";
+import {CoursesService} from "../../services/courses.service";
 import {Course} from "../models";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'course-new',
@@ -20,7 +21,7 @@ export class NewCourseComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private coursesService: CoursesService) {
+  constructor(private coursesService: CoursesService, private router: Router) {
     this.form = new FormGroup({
       courseTitle: new FormControl(null),
       author: new FormControl(null),
@@ -32,14 +33,16 @@ export class NewCourseComponent implements OnInit {
 
   authors = [];
 
-  private cardInput: any;
+  // private cardInput: any;
 
   showCourse(newItem: string) {
     console.log('show course ' + newItem + '...');
   }
 
   addAuthor(name: string) {
-    this.authors.push(name);
+    if (name) {
+      this.authors.push(name);
+    }
   }
   deleteAuthor(name: string) {
     let newAuthors = [];
@@ -66,6 +69,9 @@ export class NewCourseComponent implements OnInit {
       }
       this.coursesService.addNewCourse(course);
       console.log('add new Course: ' + this.form.value.courseTitle + ', ' + this.form.value.author + ', ' + this.form.value.text);
+      this.authors = [];
+      this.form.reset();
+      this.router.navigate(['courses/add']);
     }
   }
 

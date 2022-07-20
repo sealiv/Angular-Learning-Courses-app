@@ -1,9 +1,9 @@
 <!--<navbar></navbar>-->
 
 <div class="content">
-  <ng-container *ngIf="courses.length; else emptyList">
-    <div class="card-container" *ngIf="courses.length">
-      <app-course *ngFor="let item of courses"
+  <ng-container *ngIf="getCount() > 0; else emptyList">
+    <div class="card-container" *ngIf="getCount() > 0">
+      <app-course *ngFor="let item of getCourses()"
         [course]="item" [editable]="item.edit"
         (newEvent)="showCourse($event)"
         [title]="confirmWindowInputs.title"
@@ -11,7 +11,7 @@
         [okButtonText]="confirmWindowInputs.okButtonText"
         [cancelButtonText]="confirmWindowInputs.cancelButtonText">
       </app-course>
-      <button [disabled]="count >= getLimit()" (click)="addCourse()">Add new course</button>
+      <button [disabled]="getCount() >= getLimit()" (click)="addCourse()">Add new course</button>
     </div>
   </ng-container>
 </div>

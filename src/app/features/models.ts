@@ -12,6 +12,5 @@ export interface Course {
 
 export interface UserCourse {
   id: number,
-  user: User,
-  course: Course
+  course: Course[]
 }

@@ -80,11 +80,11 @@ export class CourseComponent implements OnInit {
   okButton() {
     this.confirmWindow.close();
     const newCourses: any = [];
-    this.coursesComponent.courses.forEach((i)=> {
+    this.coursesComponent.getCourses().forEach((i)=> {
       if (i.courseTitle != this.course.courseTitle) {
         newCourses.push(i);
       }
     })
-    this.coursesComponent.courses = newCourses;
+    this.coursesComponent.setCourses(newCourses);
   }
 }
