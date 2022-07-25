@@ -8,16 +8,16 @@
     </div>
     <div class="second">
         <p>
-            <b>Authors:</b> 
+            <b>Authors:</b>
             <span *ngFor="let autor of course.authors; let isLast=last"> {{ autor }}{{isLast? '' : ', '}}</span>
         </p>
         <p type="time">
-            <b>Duration:</b> 
-            {{ (course.duration - course.duration % 60) / 60 | number:'2.0-0'}}:{{course.duration % 60 | number:'2.0-0'}} hours 
+            <b>Duration:</b>
+            {{course.duration | courseTime}}
         </p>
         <p type="date">
-            <b>Created:</b> 
-            {{ course.created | date:'dd.MM.yyyy'}} 
+            <b>Created:</b>
+            {{ course.created | date:'dd.MM.yyyy'}}
         </p>
         <div class="button-grp">
             <button class="spase-btn" (click)="addNewShowIvent(course.courseTitle)"> Show course</button>
@@ -28,11 +28,11 @@
 </div>
 
 
-    
+
   <jw-modal id="close-1">
     <h2> {{title}} </h2>
     <p> {{message}} </p>
     <button (click)="okButton()">{{okButtonText}}</button>
     <button (click)="closeButton()">{{cancelButtonText}}</button>
-  </jw-modal> 
+  </jw-modal>
 

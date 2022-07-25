@@ -13,10 +13,11 @@ import { SharedModule } from './shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ModalModule } from './features/modal/modal.module';
 import {NewCourseComponent} from "./features/course/new-course.component";
+import {CourseModule} from "./features/course/course.module";
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, RegistrationComponent, CoursesComponent, CourseComponent, NewCourseComponent],
-  imports: [SharedModule, BrowserModule, AppRoutingModule, ModalModule, FormsModule, ReactiveFormsModule],
+  imports: [SharedModule, BrowserModule, AppRoutingModule, ModalModule, FormsModule, ReactiveFormsModule, CourseModule],
   providers: [],
   bootstrap: [AppComponent]
 })
