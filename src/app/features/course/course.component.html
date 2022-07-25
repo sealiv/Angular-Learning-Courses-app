@@ -13,7 +13,7 @@
         </p>
         <p type="time">
             <b>Duration:</b>
-            {{ (course.duration - course.duration % 60) / 60 | number:'2.0-0'}}:{{course.duration % 60 | number:'2.0-0'}} hours
+            {{course.duration | courseTime}}
         </p>
         <p type="date">
             <b>Created:</b>
