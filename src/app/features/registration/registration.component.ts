@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserService} from "../../user/services/user.service";
+import {Roles, User} from "../../auth/models";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -16,22 +19,26 @@ export class RegistrationComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() {
+  constructor(private userService: UserService, private router: Router) {
     this.form = new FormGroup({
-      name: new FormControl(null),
-      email: new FormControl(null),
-      password: new FormControl(null)
+      name: new FormControl(null, [Validators.required, Validators.minLength(6)]),
+      email: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required])
     });
   }
 
   registration() {
-    if (!this.getErrors()) {
-      console.log('new User with email: ' + this.form.value.email + ' try to registrate.');
+    if (this.form.status === "VALID") {
+      const user: User = {
+        id: 0,
+        username: this.form.value.name,
+        email: this.form.value.email,
+        password: this.form.value.password,
+        role: Roles.user
+      }
+      this.userService.createUser(user);
+      this.router.navigate(['login']);
     }
-  }
-
-  getErrors():boolean {
-    return (this.hasError || this.hasError1) || this.hasError2 || this.hasError3;
   }
 
   ngOnInit(): void {

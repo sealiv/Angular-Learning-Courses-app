@@ -1,4 +1,4 @@
-<navbar></navbar>
+<!--<navbar></navbar>-->
 
 <form class="form-content">
   <div class="div-column">
@@ -15,10 +15,34 @@
              [class.danger]="hasError2 || (userPassword.errors && (userPassword.dirty || userPassword.touched))"/>
       <span  class="danger" *ngIf="hasError2 || (userPassword.errors && (userPassword.dirty || userPassword.touched))">Password is required</span>
     </div>
-    <app-button [btnText]="btnText" (click)="hasError1 = userEmail.errors != null; hasError2 = userPassword.errors !=null; login()"> </app-button>
+    <app-button [btnText]="btnText" (click)="hasError1 = userEmail.errors != null; hasError2 = userPassword.errors !=null; takeLogin()"> </app-button>
 
     <div class="input-group">
-      <p>If you don't have an account you can <a href="#">Registration</a></p>
+      <p>If you don't have an account you can <a routerLink="/registration">Registration</a></p>
     </div>
   </div>
 </form>
+<!--
+<div class="login-wrapper">
+  <div>
+    <h3>Login Form</h3>
+
+    <div *ngIf="invalidCredentialMsg" ngClass="error">{{invalidCredentialMsg}}</div>
+    <div>
+      <form [formGroup]="loginForm" (ngSubmit)="takeLogin()">
+        <div class="example-full-width" >
+          <label>UserName</label>
+          <input formControlName="username">
+        </div>
+
+        <div class="example-full-width" >
+          <label>Password</label>
+          <input type="password" formControlName="password">
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+</div>-->

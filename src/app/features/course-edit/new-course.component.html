@@ -1,4 +1,4 @@
-<navbar></navbar>
+<!--<navbar></navbar>-->
 
 <form [formGroup]="form" class="form-content">
   <div>
@@ -7,7 +7,8 @@
       <div class="inline-group">
         <input type="text" class="input-value" required formControlName="courseTitle"
                [class.danger]="(courseTitle.errors != null && (courseTitle.dirty || courseTitle.touched))" />
-        <app-button [btnText]="btnText" (click)="(form.valid && authors.length > 0) ? add() : null"> </app-button>
+        <app-button *ngIf="isNew()" [btnText]="btnTextCreate" (click)="(form.valid && authors.length > 0) ? edit() : null"> </app-button>
+        <app-button *ngIf="!isNew()" [btnText]="btnTextEdit" (click)="(form.valid && authors.length > 0) ? edit() : null"> </app-button>
       </div>
       <span class="danger" *ngIf="(courseTitle.errors?.required  && (courseTitle.dirty || courseTitle.touched))">Title is required</span>
     </div>
@@ -24,11 +25,11 @@
         <div class="input-group">
           <h4>Add authors</h4>
           <label><b>Author name</b></label>
-          <input type="text" class="input-value" required formControlName="author"
+          <input type="text" class="input-value" formControlName="author"
                  [class.danger]="(authors.length === 0) && (author.dirty || author.touched)" />
           <span class="danger" *ngIf="((author.errors?.required)  && (author.dirty || author.touched))">Title is required</span>
         </div>
-        <app-button [btnText]="btnAuthorText" (click)="author.valid ? addAuthor(author.value) : null"></app-button>
+        <app-button [btnText]="btnAuthorText" (click)="addAuthor(author.value); author.setValue('')"></app-button>
 
         <div class="input-group">
           <h4>Duration</h4>

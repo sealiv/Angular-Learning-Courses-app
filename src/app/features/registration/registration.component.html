@@ -1,39 +1,34 @@
-<navbar></navbar>
+<!--<navbar></navbar>-->
 
-<form [formGroup]="form" class="form-content" (ngSubmit)="form.valid ? registration() : null">
+<form [formGroup]="form" class="form-content">
   <div class="div-column">
     <h3>Registration</h3>
     <div class="input-group">
       <label><b>Name</b></label>
-      <input type="text" class="input-value" required minlength="6" formControlName="name"
+      <input type="text" class="input-value" formControlName="name"
          [class.danger]="(hasError || hasError1) || ((name.errors != null && (name.dirty || name.touched)))" />
-      <span class="danger" *ngIf="hasError || (name.errors?.required  && (name.dirty || name.touched))">Name is required</span>
+      <span class="danger" *ngIf="hasError || (name.errors?.required  && (name.dirty || name.touched ))">Name is required</span>
       <span class="danger" *ngIf="hasError1 || (name.errors?.minlength && (name.touched))"> Name is less than 6 characters </span>
     </div>
 
     <div class="input-group">
       <label><b>Email</b></label>
-      <input type="text" class="input-value" required formControlName="email"
+      <input type="text" class="input-value" formControlName="email"
              [class.danger]="hasError2 || (email.errors != null && (email.dirty || email.touched))" />
       <span class="danger" *ngIf="hasError2 || (email.errors?.required  && (email.dirty || email.touched))">Name is required</span>
     </div>
 
     <div class="input-group">
       <label><b>Password</b></label>
-      <input class="input-value" required type="password" formControlName="password"
+      <input class="input-value" type="password" formControlName="password"
              [class.danger]="hasError3 || (password.errors != null && (password.dirty || password.touched))" />
        <span  class="danger" *ngIf="hasError3 || (password.errors && (password.dirty || password.touched))">Password is required</span>
     </div>
 
-     <app-button [btnText]="btnText" (click)="
-      hasError = name.errors != null && name.errors['required'] != null;
-      hasError1 = name.errors != null && name.errors['minlength'] != null;
-      hasError2 = email.errors != null;
-      hasError3 = password.errors !=null;
-      registration()">
-    </app-button>
+    <app-button [btnText]="btnText" (click)="registration()"></app-button>
+
     <div class="input-group">
-      <p>If you have an account you can <a href="#">Login</a></p>
+      <p>If you have an account you can <a routerLink="/login">Login</a></p>
     </div>
   </div>
 </form>

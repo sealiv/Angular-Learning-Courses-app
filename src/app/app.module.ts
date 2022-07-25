@@ -1,23 +1,43 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './features/login/login.component';
-import { RegistrationComponent } from './features/registration/registration.component';
-import { CoursesComponent } from './features/courses/courses.component';
-import { CourseComponent } from './features/course/course.component';
-import { SharedModule } from './shared/shared.module';
+import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AuthorizedGuard} from './auth/guards/authorized.guard';
+import {AuthService} from './auth/services/auth.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {SharedModule} from "./shared/shared.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ModalModule} from "./features/modal/modal.module";
+import {RegistrationComponent} from "./features/registration/registration.component";
+import {CoursesComponent} from "./features/courses/courses.component";
+import {CourseComponent} from "./features/course/course.component";
+import {NewCourseComponent} from "./features/course-edit/new-course.component";
+import {CoursesService} from "./services/courses.service";
+import {NonAuthorizedGuard} from "./auth/guards/non-authorized.guard";
+import {UserService} from "./user/services/user.service";
+import {AdminGuard} from "./user/services/admin.guard";
+import {UserStoreService} from "./user/services/user-store.service";
+import {SessionStorageService} from "./auth/services/session-storage.service";
 
-
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ModalModule } from './features/modal/modal.module';
-import {NewCourseComponent} from "./features/course/new-course.component";
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegistrationComponent, CoursesComponent, CourseComponent, NewCourseComponent],
-  imports: [SharedModule, BrowserModule, AppRoutingModule, ModalModule, FormsModule, ReactiveFormsModule],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [
+    BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, /*ModalModule,*/ ReactiveFormsModule, FormsModule,
+  ],
+  declarations: [ AppComponent, /*RegistrationComponent, CoursesComponent,*/ /*CourseComponent, *//*NewCourseComponent*/ ],
+  providers: [
+    AuthService,
+    SessionStorageService,
+    AuthorizedGuard,
+    NonAuthorizedGuard,
+    // CoursesService,
+    UserService,
+    UserStoreService,
+    AdminGuard,
+    { provide: Window, useValue: window } ],
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class AppModule {}
+export class AppModule {
+}

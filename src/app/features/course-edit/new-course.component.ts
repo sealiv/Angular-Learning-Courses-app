@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import {CoursesService} from "../../services/courses.service";
+import {Course} from "../models";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'new-course',
+  selector: 'course-new',
   templateUrl: './new-course.component.html',
-  styleUrls: ['./course.component.css', '../../shared/components/shared.style.css']
+  styleUrls: ['../course/course.component.css', '../../shared/components/shared.style.css']
 })
 export class NewCourseComponent implements OnInit {
 
-  btnText = 'Create course';
+  btnTextCreate = 'Create course';
+  btnTextEdit = 'Save changes';
   btnAuthorText = 'Create author';
   btnDelAuthorText = 'Delete author';
   hasError = false;
@@ -18,7 +22,7 @@ export class NewCourseComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() {
+  constructor(private coursesService: CoursesService, private router: Router) {
     this.form = new FormGroup({
       courseTitle: new FormControl(null),
       author: new FormControl(null),
@@ -30,14 +34,18 @@ export class NewCourseComponent implements OnInit {
 
   authors = [];
 
-  private cardInput: any;
+  isNew(): boolean {
+    return true;
+  }
 
   showCourse(newItem: string) {
     console.log('show course ' + newItem + '...');
   }
 
   addAuthor(name: string) {
-    this.authors.push(name);
+    if (name) {
+      this.authors.push(name);
+    }
   }
   deleteAuthor(name: string) {
     let newAuthors = [];
@@ -51,9 +59,22 @@ export class NewCourseComponent implements OnInit {
   }
 
 
-  add() {
+  edit() {
     if (!this.getErrors()) {
+      const course: Course = {
+        authors: this.authors,
+        courseTitle: this.form.value.courseTitle,
+        created: new Date(),
+        duration: this.form.value.duration,
+        edit: true,
+        id: this.coursesService.getNewId(),
+        text: this.form.value.text
+      }
+      this.coursesService.addNewCourse(course);
       console.log('add new Course: ' + this.form.value.courseTitle + ', ' + this.form.value.author + ', ' + this.form.value.text);
+      this.authors = [];
+      this.form.reset();
+      this.router.navigate(['courses/add']);
     }
   }
 

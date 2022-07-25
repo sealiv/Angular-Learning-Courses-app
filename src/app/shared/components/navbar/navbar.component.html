@@ -1,10 +1,18 @@
 <form class="toolbar" role="banner">
-    <img height="40" alt="Logo" src="assets/images/Logo.png" />
-    <div class="spacer"></div>
-    <div *ngIf="userName" class="toolbar-item">
-        <label>
-            <h4>{{userName}}</h4>
-        </label>
-        <app-button [btnText]="btnText" (click)="logOut()"></app-button>
-    </div>
+  <a href="/courses"><img height="40" alt="Logo" src="assets/images/Logo.png" /></a>
+  <div class="spacer">
+    <label><a routerLink="/">Homepage</a></label>
+    <label><a routerLink="/courses/add">Add course</a></label>
+    <label><a routerLink="/courses">Courses</a></label>
+    <label><a routerLink="/login">Login</a></label>
+    <label><a routerLink="/registration">Registration</a></label>
+  </div>
+  <div *ngIf="loggedInUser.id > 0" class="toolbar-item">
+      <label>
+          <h4>{{loggedInUser.username}} | {{loggedInUser.role}}</h4>
+      </label>
+      <app-button [btnText]="btnText" (click)="logout()"></app-button>
+  </div>
+
 </form>
+<!--<router-outlet></router-outlet>-->

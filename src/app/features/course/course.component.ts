@@ -1,15 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { CoursesComponent } from '../courses/courses.component';
 import { faGraduationCap, faHammer, faTrash } from '../../shared/shared.module';
+import {Router} from "@angular/router";
+import {UserService} from "../../user/services/user.service";
 
-export interface Course {
-  courseTitle: string,
-  authors: string[],
-  duration: number,
-  created: Date,
-  text: string,
-  edit: boolean
-}
 
 @Component({
   selector: 'app-course',
@@ -25,6 +19,7 @@ export class CourseComponent implements OnInit {
   @Input() cancelButtonText: string = '';
 
   @Input() course = {
+    id: 0,
     courseTitle: '',
     authors: [''],
     duration:  0,
@@ -35,21 +30,6 @@ export class CourseComponent implements OnInit {
 
   @Output() newEvent = new EventEmitter<string>();
 
-  addNewShowIvent(value: string) {
-    if (value.length) {
-      console.log('click on ' + value);
-      this.newEvent.emit(value);
-    }
-  }
-
-  @Output() newItemEvent3 = new EventEmitter<string>();
-
-  addNewItem(value: string) {
-    if (value.length) {
-      this.newItemEvent3.emit(value);
-    }
-  }
-
   ngOnInit(): void {
   }
 
@@ -57,30 +37,44 @@ export class CourseComponent implements OnInit {
   editIcon = faHammer;
   deleteIcon = faTrash;
 
-  constructor(private coursesComponent: CoursesComponent) {}
+  constructor(private coursesComponent: CoursesComponent, private router: Router, private userService: UserService) {}
 
-  private confimWindow: any;
+  showCourse(id: number){
+    const path = '/courses/' + id;
+    this.router.navigate([path]);
+  }
+
+  editCourse(id: number){
+    const path = '/courses/edit/' + id;
+    this.router.navigate([path]);
+  }
+
+  private confirmWindow: any;
+
+  isAdmin() {
+    return this.userService.isUserAdmin();
+  }
 
   add(modal: any) {
-    this.confimWindow = modal;
+    this.confirmWindow = modal;
   }
 
   openModal(title: string) {
-    this.confimWindow.open();
+    this.confirmWindow.open();
   }
 
   closeButton() {
-    this.confimWindow.close();
+    this.confirmWindow.close();
   }
 
   okButton() {
-    this.confimWindow.close();
+    this.confirmWindow.close();
     const newCourses: any = [];
-    this.coursesComponent.courses.forEach((i)=> {
+    this.coursesComponent.getCourses().forEach((i)=> {
       if (i.courseTitle != this.course.courseTitle) {
         newCourses.push(i);
       }
     })
-    this.coursesComponent.courses = newCourses;
+    this.coursesComponent.setCourses(newCourses);
   }
 }
