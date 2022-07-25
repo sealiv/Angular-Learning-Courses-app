@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -18,15 +18,15 @@ export class RegistrationComponent implements OnInit {
 
   constructor() {
     this.form = new FormGroup({
-      name: new FormControl(null),
-      email: new FormControl(null),
-      password: new FormControl(null)
+      name: new FormControl(null, [Validators.required, Validators.minLength(6)]),
+      email: new FormControl(null, [Validators.required, emailValidator]),
+      password: new FormControl(null, [Validators.required])
     });
   }
 
   registration() {
-    if (!this.getErrors()) {
-      console.log('new User with email: ' + this.form.value.email + ' try to registrate.');
+    if (this.form.status === "VALID") {
+      console.log('new User with email: ' + this.form.value.email + ' was registered.');
     }
   }
 
@@ -48,4 +48,14 @@ export class RegistrationComponent implements OnInit {
   get password() {
     return this.form.get('password');
   }
+}
+
+function emailValidator(control: AbstractControl): { [key: string]: boolean } | null {
+  if (control.value != null && control.value != '') {
+    let res = control.value.match("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$");
+    if (res != null && res.length > 0) {
+      return null;
+    }
+  }
+  return { 'email': true };
 }
