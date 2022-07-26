@@ -17,3 +17,5 @@ export const userReducer = createReducer(
   on(requestCurrentUserSuccess, (state, { name, isAdmin }) => ({ ...state, name: name, isAdmin: isAdmin })),
   on(requestCurrentUserFail, (state) => ({ ...state }))
 );
+
+export const userFeatureKey = userReducer.name;

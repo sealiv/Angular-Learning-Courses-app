@@ -10,8 +10,8 @@ export class SessionStorageService {
     sessionStorage.setItem('token', token);
   }
 
-  getToken () {
-    sessionStorage.getItem('token');
+  getToken (): string {
+    return sessionStorage.getItem('token');
   }
 
   deleteToken () {
