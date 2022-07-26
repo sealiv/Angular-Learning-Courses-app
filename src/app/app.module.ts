@@ -23,11 +23,7 @@ import {effects, reducers} from "./store";
 @NgModule({
   imports: [
     BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, ReactiveFormsModule, FormsModule,
-
-    // StoreModule.forRoot({ reducers8: reducers }),
-    // EffectsModule.forRoot([effects]),
-
-    StoreModule.forRoot({ user: userReducer }),
+    StoreModule.forRoot({ user: userReducer}),
     EffectsModule.forRoot([UserEffects]),
     // reducers,
     effects,

@@ -6,6 +6,7 @@ import {UserFacade} from "../../../user/store/user.facade";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {requestCurrentUser} from "../../../user/store/user.actions";
+import {UserState} from "../../../user/store/user.reducer";
 
 @Component({
   selector: 'navbar',
@@ -22,7 +23,7 @@ export class NavbarComponent implements OnInit {
   // isAdmin = this.userFacade.isAdmin$;
 
   constructor(private authService: AuthService, private router: Router, private userFacade: UserFacade,
-              private store: Store<{ user: User }>) { }
+              private store: Store<{ user: UserState }>) { }
 
   ngOnInit() {
     this.loggedInUser = this.authService.getUser();

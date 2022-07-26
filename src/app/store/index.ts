@@ -1,4 +1,4 @@
-import {ActionReducerMap, StoreModule} from "@ngrx/store";
+import { ActionReducerMap,} from "@ngrx/store";
 
 export interface State {}
 

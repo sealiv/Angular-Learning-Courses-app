@@ -16,8 +16,7 @@ export class UserEffects {
       mergeMap(() =>
         of(this.userService.getCurrentUser())
           .pipe(
-            map(user => (requestCurrentUserSuccess({user: user}) )),
-            // map(user => (requestCurrentUserSuccess({name: user.username, isAdmin: user.role === Roles.admin}) )),
+            map(user => (requestCurrentUserSuccess({name: user.username, isAdmin: user.role === Roles.admin}) )),
             catchError(() => of(requestCurrentUserFail()))
           )
       )
