@@ -2,6 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import {AuthService} from "../../../auth/services/auth.service";
 import {Router} from "@angular/router";
 import {User} from "../../../auth/models";
+import {UserFacade} from "../../../user/store/user.facade";
+import {Store} from "@ngrx/store";
+import {Observable} from "rxjs";
+import {requestCurrentUser} from "../../../user/store/user.actions";
 
 @Component({
   selector: 'navbar',
@@ -14,12 +18,16 @@ export class NavbarComponent implements OnInit {
   btnText = 'logOut';
 
   loggedInUser = {} as User;
+  // name = this.userFacade.name$;
+  // isAdmin = this.userFacade.isAdmin$;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private userFacade: UserFacade,
+              private store: Store<{ user: User }>) { }
 
   ngOnInit() {
     this.loggedInUser = this.authService.getUser();
-    console.log('user = ' + this.loggedInUser.username)
+    console.log('user = ' + this.loggedInUser.username);
+    this.store.dispatch(requestCurrentUser());
   }
 
   logout() {
@@ -27,4 +35,5 @@ export class NavbarComponent implements OnInit {
     this.router.navigate([this.authService.getLoginUrl()]);
   }
 
+  user$: Observable<any> = this.store.select('user');
 }

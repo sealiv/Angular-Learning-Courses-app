@@ -13,12 +13,24 @@ import {UserService} from "./user/services/user.service";
 import {AdminGuard} from "./user/services/admin.guard";
 import {UserStoreService} from "./user/services/user-store.service";
 import {SessionStorageService} from "./auth/services/session-storage.service";
-import {effects, reducers} from "./store"
+
+import {StoreModule} from "@ngrx/store";
+import {EffectsModule} from "@ngrx/effects";
+import {userReducer} from "./user/store/user.reducer";
+import {UserEffects} from "./user/store/user.effects";
+import {effects, reducers} from "./store";
 
 @NgModule({
   imports: [
     BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, ReactiveFormsModule, FormsModule,
-    reducers, effects
+
+    // StoreModule.forRoot({ reducers8: reducers }),
+    // EffectsModule.forRoot([effects]),
+
+    StoreModule.forRoot({ user: userReducer }),
+    EffectsModule.forRoot([UserEffects]),
+    // reducers,
+    effects,
   ],
   declarations: [ AppComponent ],
   providers: [

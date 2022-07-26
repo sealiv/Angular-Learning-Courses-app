@@ -38,6 +38,10 @@ export class UserService {
     return this.user;
   }
 
+  getCurrentUser(): User {
+    return this.authService.getUser();
+  }
+
   isUserAdmin(): boolean {
     return this.authService.getUser().role === Roles.admin;
   }

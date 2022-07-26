@@ -9,10 +9,8 @@
   </div>
   <div *ngIf="loggedInUser.id > 0" class="toolbar-item">
       <label>
-          <h4>{{loggedInUser.username}} | {{loggedInUser.role}}</h4>
+          <h4>{{ (user$ | async).user.username }} | {{ (user$ | async).user.role }}</h4>
       </label>
       <app-button [btnText]="btnText" (click)="logout()"></app-button>
   </div>
-
 </form>
-<!--<router-outlet></router-outlet>-->
