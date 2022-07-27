@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
 import {Course, UserCourse} from "../features/models";
 import {CoursesStoreService} from "./courses-store.service";
 import {User} from "../auth/models";
@@ -18,6 +18,17 @@ export class CoursesService {
     return this.courses$$.asObservable();
   }
 
+  getFilteredCurses(duration: number): Observable<Course[]> {
+    let allCourses = this.coursesStoreService.getAll();
+    let filteredCourses = [];
+    for (let i = 0; i < allCourses.length; i++) {
+      if (allCourses[i].duration >= duration) {
+        filteredCourses.push(allCourses[i]);
+      }
+    }
+    return of(filteredCourses);
+  }
+
   getNewId(): number {
     return this.courses$$.value.length + 1;
   }
@@ -33,6 +44,14 @@ export class CoursesService {
   addNewCourse(course: Course) {
     console.log('Created Course: ' + course.courseTitle);
     this.coursesStoreService.create(course);
+  }
+
+  deleteCourse(courseId: number) {
+    this.coursesStoreService.delete(courseId);
+  }
+
+  editCourse(course: Course) {
+    this.coursesStoreService.edit(course);
   }
 
   getCourse(id: number) {

@@ -6,12 +6,13 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ButtonComponent } from './components/button/button.component';
 import { TextareaComponent } from './components/textarea/textarea.component';
 import {RouterModule} from "@angular/router";
+import {UserFacade} from "../user/store/user.facade";
 export { faTrash, faGraduationCap, faHammer, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 
 @NgModule({
   imports: [CommonModule, FontAwesomeModule, RouterModule],
-
+  providers: [UserFacade],
   declarations: [CommonComponent, NavbarComponent, NavbarComponent, ButtonComponent, TextareaComponent],
   exports: [CommonComponent, FontAwesomeModule, NavbarComponent, ButtonComponent, TextareaComponent]
 })

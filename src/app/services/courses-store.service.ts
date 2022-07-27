@@ -43,7 +43,7 @@ const COURSES: Course[] = [
 @Injectable({ providedIn: 'root'})
 export class CoursesStoreService {
 
-  constructor() { }
+  constructor() {}
 
   getAll(): Course[]{
     return COURSES;
@@ -52,5 +52,21 @@ export class CoursesStoreService {
   create(course: Course) {
     course.id = COURSES.length + 1;
     COURSES.push(course);
+  }
+
+  delete(courseId: number) {
+    for (let i = 0; i < COURSES.length; i++) {
+      if (COURSES[i].id == courseId) {
+        COURSES.splice(i, 1);
+      }
+    }
+  }
+
+  edit(course: Course) {
+    for (let i = 0; i < COURSES.length; i++) {
+      if (COURSES[i].id == course.id) {
+        COURSES[i] = course
+      }
+    }
   }
 }

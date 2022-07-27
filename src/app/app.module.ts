@@ -8,30 +8,30 @@ import {AuthService} from './auth/services/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SharedModule} from "./shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ModalModule} from "./features/modal/modal.module";
-import {RegistrationComponent} from "./features/registration/registration.component";
-import {CoursesComponent} from "./features/courses/courses.component";
-import {CourseComponent} from "./features/course/course.component";
-import {NewCourseComponent} from "./features/course-edit/new-course.component";
-import {CoursesService} from "./services/courses.service";
 import {NonAuthorizedGuard} from "./auth/guards/non-authorized.guard";
 import {UserService} from "./user/services/user.service";
 import {AdminGuard} from "./user/services/admin.guard";
 import {UserStoreService} from "./user/services/user-store.service";
 import {SessionStorageService} from "./auth/services/session-storage.service";
 
+import {StoreModule} from "@ngrx/store";
+import {EffectsModule} from "@ngrx/effects";
+import {userReducer} from "./user/store/user.reducer";
+import {effects, reducers} from "./store";
 
 @NgModule({
   imports: [
-    BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, /*ModalModule,*/ ReactiveFormsModule, FormsModule,
+    BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, ReactiveFormsModule, FormsModule,
+    StoreModule.forRoot({user: userReducer}),
+    EffectsModule.forRoot(effects),
+    // reducers
   ],
-  declarations: [ AppComponent, /*RegistrationComponent, CoursesComponent,*/ /*CourseComponent, *//*NewCourseComponent*/ ],
+  declarations: [ AppComponent ],
   providers: [
     AuthService,
     SessionStorageService,
     AuthorizedGuard,
     NonAuthorizedGuard,
-    // CoursesService,
     UserService,
     UserStoreService,
     AdminGuard,
