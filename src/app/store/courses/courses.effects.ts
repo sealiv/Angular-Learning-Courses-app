@@ -13,7 +13,7 @@ import {
 import {CoursesService} from "../../services/courses.service";
 
 @Injectable()
-export class UserEffects {
+export class CoursesEffects {
 
   getAll$ = createEffect(() =>
     this.actions$.pipe(

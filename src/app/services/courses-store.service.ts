@@ -43,9 +43,7 @@ const COURSES: Course[] = [
 @Injectable({ providedIn: 'root'})
 export class CoursesStoreService {
 
-  constructor() {
-    this.delete(2);
-  }
+  constructor() {}
 
   getAll(): Course[]{
     return COURSES;

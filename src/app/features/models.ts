@@ -14,3 +14,8 @@ export interface UserCourse {
   id: number,
   course: Course[]
 }
+
+export interface Author {
+  id: number,
+  name: string
+}
