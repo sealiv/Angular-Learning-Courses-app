@@ -21,7 +21,7 @@ export const authReducer = createReducer(
   initialState,
   on(requestLogin, (state, {user}) => ({ ...state, user: user })),
   on(requestLoginSuccess, (state, { token }) => ({ ...state, token: token })),
-  on(requestLoginFail, (state) => ({ ...state, errorMessage: 'Invalid login' }))
+  on(requestLoginFail, (state, { errorMessage }) => ({ ...state, errorMessage: errorMessage }))
 );
 
 export const authFeatureKey = authReducer.name;
@@ -30,5 +30,5 @@ export const registerReducer = createReducer(
   initialState,
   on(requestRegister, (state, {user}) => ({ ...state, user: user })),
   on(requestRegisterSuccess, (state) => ({ ...state })),
-  on(requestRegisterFail, (state) => ({ ...state, errorMessage: 'Invalid register' }))
+  on(requestRegisterFail, (state, { errorMessage }) => ({ ...state, errorMessage: errorMessage }))
 );

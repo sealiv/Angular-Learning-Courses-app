@@ -5,6 +5,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from '../features/login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import {SharedModule} from "../shared/shared.module";
+import {EffectsModule} from "@ngrx/effects";
+import {UserEffects} from "../user/store/user.effects";
 
 const authRoutes: Routes = [
   {
@@ -20,6 +22,7 @@ const authRoutes: Routes = [
     ReactiveFormsModule,
     SharedModule,
     FormsModule,
+    EffectsModule.forFeature([UserEffects]),
   ],
   exports: [RouterModule],
   declarations: [LoginComponent],

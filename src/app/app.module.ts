@@ -17,16 +17,14 @@ import {SessionStorageService} from "./auth/services/session-storage.service";
 import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {userReducer} from "./user/store/user.reducer";
-import {UserEffects} from "./user/store/user.effects";
 import {effects, reducers} from "./store";
 
 @NgModule({
   imports: [
     BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, ReactiveFormsModule, FormsModule,
-    StoreModule.forRoot({ user: userReducer}),
-    EffectsModule.forRoot([UserEffects]),
-    // reducers,
-    effects,
+    StoreModule.forRoot({user: userReducer}),
+    EffectsModule.forRoot(effects),
+    // reducers
   ],
   declarations: [ AppComponent ],
   providers: [

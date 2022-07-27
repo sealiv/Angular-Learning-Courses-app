@@ -6,7 +6,7 @@ export const requestLoginSuccess = createAction('[Login Page] Login Success', pr
 export const requestLoginFail = createAction('[Login Page] Login Failure', props<{ errorMessage: string}>());
 
 export const requestRegister = createAction('[Register Page] Register', props<{user: User}>());
-export const requestRegisterSuccess = createAction('[Register Page] Register Success');
+export const requestRegisterSuccess = createAction('[Register Page] Register Success', props<{user: User}>());
 export const requestRegisterFail = createAction('[Register Page] Register Failure', props<{ errorMessage: string}>());
 
 export const requestLogout = createAction('[Logout Page] Logout');
